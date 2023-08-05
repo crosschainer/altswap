@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>AltSwap (UI for Rocketswap)</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://reflecttau.io/swap/assets/img/favicon.png"
+    />
+    <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link
+      id="pagestyle"
+      href="assets/css/soft-ui-dashboard.css?v=1.0.3"
+      rel="stylesheet"
+    />
+    <link href="assets/css/micromodal.css" rel="stylesheet" />
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+      .ui-state-disabled {
+        pointer-events: none;
+        background: #474958;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100" style="display: flex; justify-content: center">
+    <main
+      class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg"
+      style="max-width: 768px"
+    >
+      <div class="container-fluid py-4">
+        <div class="row pb-2">
+          <div class="col-lg-12" style="z-index: 10000; text-align: center">
+            <img src="./assets/img/logo.png" style="max-width: 10em" />
+          </div>
+        </div>
+
+        <div class="row pb-2" style="">
+          <div style="z-index: 1" class="col-lg-12">
+            <div class="card z-index-2" style="text-align: center">
+              <div
+                class="card-body p-3"
+                style="padding: 0 !important; display: flex; font-size: 0.75em"
+              >
+                <div class="col-12">
+                  <a
+                    href="#"
+                    class="bg-gradient-dark text-white"
+                    id="swap_tab_menu"
+                    style="
+                      border: 1px solid #dee2e6 !important;
+                      width: 100%;
+                      display: block;
+                      border-radius: 0.5rem;
+                      padding-top: 0.5em;
+                      padding-bottom: 0.5em;
+                      
+                     
+                      border-right-width: 0.5px !important;
+                      text-transform: uppercase !important;
+                      font-weight: 700 !important;
+                    "
+                    >Swap</a
+                  >
+                </div>
+                
+              
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pb-2" id="token_selection_menu">
+          <div class="col-lg-12" style="z-index: 3">
+            <div class="card z-index-2">
+              <div class="card-body p-3">
+                <div class="dropdown">
+                  <button
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style="
+                      margin-bottom: 0;
+                      width: 100%;
+                      border: 1px solid #dee2e6 !important;
+                      box-shadow: none;
+                    "
+                    class="btn dropdown-toggle"
+                  >
+                    Loading..
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    id="token_dropdown_mobile"
+                    aria-labelledby="dropdownMenuButton"
+                    style="
+                      width: 100%;
+                      transform: rotateX(-10deg) translateZ(0)
+                        translate3d(0, 37px, 0) !important;
+                      max-height: 20em;
+                      overflow-y: auto;
+                    "
+                  >
+                    <li>
+                      <a class="dropdown-item" href="#" onclick=""
+                        >Loading...</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card z-index-2" id="swap_tab">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-6">
+                    <h6>Swap</h6>
+                  </div>
+                  <div class="col-6 my-auto text-end">
+                    <div class="dropdown float-end ps-4">
+                      <a
+                        href="javascript:;"
+                        id="connect_wallet"
+                        class="nav-link text-body font-weight-bold btn bg-gradient-primary"
+                        style="
+                          color: white !important;
+                          margin-bottom: 0;
+                          font-weight: 700 !important;
+                        "
+                      >
+                        <i class="fa fa-wallet me-sm-1" aria-hidden="true"></i>
+                        <span class="d-sm-inline" id="connect_wallet_text"
+                          >Connect Lamden Vault</span
+                        >
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <div class="row p-2">
+                  <div class="col-md-12">
+                    <div style="display: flex; justify-content: space-between">
+                      <h6
+                        class="text-uppercase text-body text-xs font-weight-bolder mb-3"
+                      >
+                        You sell
+                      </h6>
+                      <h6
+                        class="text-uppercase text-body text-xs font-weight-bolder mb-3"
+                      >
+                        Balance: <a href="#" id="from_balance">0.00000000</a>
+                        <span id="from_symbol">TAU</span>
+                      </h6>
+                    </div>
+                    <div
+                      class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row"
+                    >
+                      <img
+                        id="from_coinselect"
+                        class="w-10 me-3 mb-0"
+                        style="cursor: pointer"
+                        src="https://cdn-images-1.medium.com/fit/c/336/336/1*URTxwSXhDTOP2o8TTmPqgA.png"
+                        alt="logo"
+                       
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="0.00000000"
+                        id="from_input"
+                        style="border: 0; font-weight: 600; font-size: 1rem"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row pt-1 pb-1" style="">
+                  <div class="col-md-12" style="">
+                    <div style="display: flex; justify-content: center">
+                      <h6
+                        class="text-uppercase text-body text-xs font-weight-bolder"
+                        style="margin-bottom: 0"
+                        id="switch"
+                      >
+                        <i
+                          class="fa fa-solid fa-arrow-down"
+                          style="
+                            font-size: 3em;
+                            padding: 0.5em;
+                            cursor: pointer;
+                          "
+                        ></i>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="row p-2">
+                  <div class="col-md-12">
+                    <div style="display: flex; justify-content: space-between">
+                      <h6
+                        class="text-uppercase text-body text-xs font-weight-bolder mb-3"
+                      >
+                        You buy
+                      </h6>
+                      <h6
+                        class="text-uppercase text-body text-xs font-weight-bolder mb-3"
+                      >
+                        Balance: <a href="#" id="to_balance">0.00000000</a>
+                        <span id="to_symbol">$YETI</span>
+                      </h6>
+                    </div>
+                    <div
+                      class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row"
+                    >
+                      <img
+                        class="w-10 me-3 mb-0"
+                        id="to_coinselect"
+                        src="https://static.tauhq.com/file/wwwtauhqcom/img/token_logo/con_yeti.jpg"
+                        alt="logo"
+                        
+                        style="cursor: pointer"
+                        
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="0.00000000"
+                        id="to_input"
+                        style="border: 0; font-weight: 600; font-size: 1rem"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row p-2">
+                  <div class="col-md-12">
+                    <a
+                      class="btn bg-gradient-dark mb-0 text-lg"
+                      href="javascript:;"
+                      id="swap"
+                      style="width: 100%"
+                      >Swap</a
+                    >
+                    <div
+                      class="mt-3"
+                      style="
+                        border: 1px solid #dee2e6 !important;
+                        border-radius: 0.75rem;
+                        padding: 1.5rem;
+                      "
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: row;
+                          justify-content: space-between;
+                        "
+                      >
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                          style="font-weight: 500 !important"
+                        >
+                          Price
+                        </h6>
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                          id="price"
+                        >
+                          0.00000000 $YETI per TAU
+                        </h6>
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: row;
+                          justify-content: space-between;
+                        "
+                      >
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                          style="font-weight: 500 !important"
+                        >
+                          Fee (Rocketswap)
+                        </h6>
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                        >
+                          <span id="fee">0.00000000</span>
+
+                          <span id="to_symbol_fee"></span>
+                        </h6>
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: row;
+                          justify-content: space-between;
+                        "
+                      >
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                          style="font-weight: 500 !important"
+                        >
+                          Price Impact (slippage)
+                        </h6>
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                        >
+                          <span id="slippage">0</span>%
+                        </h6>
+                      </div>
+                      <div
+                        style="
+                          display: none;
+                          flex-direction: row;
+                          justify-content: space-between;
+                        "
+                      >
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                          style="font-weight: 500 !important"
+                        >
+                          Slippage Tolerance
+                        </h6>
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                        >
+                          Auto
+                        </h6>
+                      </div>
+                      
+                      <div
+                        style="
+                          display: none;
+                          flex-direction: row;
+                          justify-content: space-between;
+                        "
+                      >
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                          style="font-weight: 500 !important"
+                        >
+                          Guaranteed Minimum
+                        </h6>
+                        <h6
+                          class="text-uppercase text-body text-xs font-weight-bolder"
+                        >
+                          NOT IMPLEMENTED YET
+                        </h6>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card z-index-2" id="pools_tab" style="display:none">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-6">
+                    <h6>Pools</h6>
+                  </div>
+                  
+                  <div class="col-6 my-auto text-end">
+                    <div class="dropdown float-end ps-4">
+                      <a
+                        href="javascript:;"
+                        id="connect_wallet"
+                        class="nav-link text-body font-weight-bold btn bg-gradient-primary"
+                        style="
+                          color: white !important;
+                          margin-bottom: 0;
+                          font-weight: 700 !important;
+                        "
+                      >
+                        <i class="fa fa-wallet me-sm-1" aria-hidden="true"></i>
+                        <span class="d-sm-inline" id="connect_wallet_text_2"
+                          >Connect Lamden Vault</span
+                        >
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                  
+                  </div>
+                  
+                  <div class="col-6" style="display: flex;justify-content: flex-end;">
+                  <div style="width: fit-content;display: flex;gap: 10px;" class="mt-2"><a href="javascript:;" id="add_liquidity" class="nav-link text-body font-weight-bold btn bg-gradient-dark ui-state-disabled" style=" color: white !important; margin-bottom: 0; font-weight: 700 !important; "> <i class="fa fa-plus me-sm-1" aria-hidden="true"></i> <span class="d-sm-inline">Add Liquidity</span> </a><a href="javascript:;" id="create_market" class="nav-link text-body font-weight-bold btn bg-gradient-dark ui-state-disabled" style=" color: white !important; margin-bottom: 0; font-weight: 700 !important; "> <i class="fa fa-plus me-sm-1" aria-hidden="true"></i> <span class="d-sm-inline">Create Market</span> </a></div>
+                  </div></div>
+              </div>
+              <div class="card-body p-3" id="pool_grid">
+                
+              </div>
+              </div>
+              <div class="card z-index-2" id="farms_tab" style="display:none">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-6">
+                    <h6>Farms</h6>
+                  </div>
+                  <div class="col-6 my-auto text-end">
+                    <div class="dropdown float-end ps-4">
+                      <a
+                        href="javascript:;"
+                        id="connect_wallet"
+                        class="nav-link text-body font-weight-bold btn bg-gradient-primary"
+                        style="
+                          color: white !important;
+                          margin-bottom: 0;
+                          font-weight: 700 !important;
+                        "
+                      >
+                        <i class="fa fa-wallet me-sm-1" aria-hidden="true"></i>
+                        <span class="d-sm-inline" id="connect_wallet_text_3"
+                          >Connect Lamden Vault</span
+                        >
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <div class="row p-2">
+                  <div class="col-md-12"></div>
+                </div>
+              </div>
+              </div>
+              <div class="card z-index-2" id="launchpad_tab" style="display:none">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-6">
+                    <h6>Launchpad</h6>
+                  </div>
+                  <div class="col-6 my-auto text-end">
+                    <div class="dropdown float-end ps-4">
+                      <a
+                        href="javascript:;"
+                        id="connect_wallet"
+                        class="nav-link text-body font-weight-bold btn bg-gradient-primary"
+                        style="
+                          color: white !important;
+                          margin-bottom: 0;
+                          font-weight: 700 !important;
+                        "
+                      >
+                        <i class="fa fa-wallet me-sm-1" aria-hidden="true"></i>
+                        <span class="d-sm-inline" id="connect_wallet_text_4"
+                          >Connect Lamden Vault</span
+                        >
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <div class="row p-2">
+                  <div class="col-md-12"></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        
+        <div class="row pt-2" >
+          <div class="col-lg-12">
+            <div class="card z-index-2">
+              <div class="card-body p-3">
+                <h5>Are you on Mobile?</h5>
+                <div class="row">
+                  <div class="col-6">
+                    <h6>Use Kiwi Browser on Android ✔️</h6>
+                    <a
+                      href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser&amp;hl=de&amp;gl=US"
+                      target="_blank"
+                      ><img
+                        src="https://play-lh.googleusercontent.com/IpPy16lik1fLrJs0fkaFuKrUm6Hw9Q3KDa2gLbewoze0Ko39gEIOyDECYOZBFJLHGeo"
+                        style="max-width: 512px; width: 100%"
+                    /></a>
+                  </div>
+                  <div class="col-6">
+                    <h6>And the Lamden Vault Extension ✔️</h6>
+                    <a
+                      href="https://chrome.google.com/webstore/detail/lamden-vault-browser-exte/fhfffofbcgbjjojdnpcfompojdjjhdim"
+                      target="_blank"
+                      ><img
+                        style="max-width: 512px; width: 100%"
+                        src="https://pbs.twimg.com/media/ETB8_-zU8AAUh7N.jpg"
+                    /></a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h6 style="text-align: center; padding-top: 1em">
+                      to use this dApp 🚀
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal micromodal-slide" id="modal-coinselect" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+        <header class="modal__header">
+          <h2 class="modal__title" id="modal-coinselect-title">
+            Token Select
+          </h2>
+          <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+        </header>
+        <main class="modal__content" id="modal-coinselect-content">
+          <div id="token_list"
+            style="display: flex;flex-wrap: wrap;flex-direction: row;justify-content: space-between;">
+            
+
+          </div>
+        </main>
+
+      </div>
+    </div>
+  </div>
+    </main>
+
+    
+   
+    <script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.0.2/bignumber.min.js'></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="assets/js/swap.js"></script>
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <script>
+      MicroModal.init();
+    </script>
+  </body>
+</html>
