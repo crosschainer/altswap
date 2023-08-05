@@ -488,8 +488,10 @@ $("#swap").click(function () {
     if (fromContract == "currency") {
         const detail = JSON.stringify({
             contractName: 'currency',
+            networkName: 'arko', // ADD THIS HERE
             methodName: 'approve',
             networkType: 'mainnet',
+            
             kwargs: {
                 amount: Number($("#from_input").val()),
                 to: "con_rocketswap_official_v1_1"
@@ -502,6 +504,7 @@ $("#swap").click(function () {
     else {
         const detail = JSON.stringify({
             contractName: fromContract,
+            networkName: 'arko', // ADD THIS HERE
             methodName: 'approve',
             networkType: 'mainnet',
             kwargs: {
@@ -526,6 +529,7 @@ document.addEventListener('lamdenWalletTxStatus', (response) => {
             if (fromContract == "currency") {
                 const detail = JSON.stringify({
                     contractName: 'con_rocketswap_official_v1_1',
+                    networkName: 'arko', // ADD THIS HERE
                     methodName: 'buy',
                     networkType: 'mainnet',
                     kwargs: {
@@ -540,6 +544,7 @@ document.addEventListener('lamdenWalletTxStatus', (response) => {
             else {
                 const detail = JSON.stringify({
                     contractName: 'con_rocketswap_official_v1_1',
+                    networkName: 'arko', // ADD THIS HERE
                     methodName: 'sell',
                     networkType: 'mainnet',
                     kwargs: {
