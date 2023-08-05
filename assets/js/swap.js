@@ -130,13 +130,13 @@ function getPairData(from_contract, to_contract) {
                     assetReserves = Number(reserves['value'][1]["__fixed__"]);
                     price = Number(price["value"]["__fixed__"]).toFixed(8);
                     if (from_contract == currencyContract) {
-                        $("#price").text((1 / price).toFixed(8) + " " + symbol["value"] + " PER TAU");
+                        //$("#price").text((1 / price).toFixed(8) + " " + symbol["value"] + " PER TAU");
 
                         from_symbol = "TAU";
                         to_symbol = symbol["value"];
                     }
                     else {
-                        $("#price").text(price + " " + symbol["value"] + " PER TAU");
+                        //$("#price").text(price + " " + symbol["value"] + " PER TAU");
                         from_symbol = symbol["value"];
                         to_symbol = "TAU";
                     }
@@ -158,7 +158,7 @@ function getPairData(from_contract, to_contract) {
                     price = Number(price["value"]["__fixed__"]).toFixed(8);
                     //console.log(from_contract);
 
-                    $("#price").text(price + " TAU PER " + symbol["value"]);
+                    //$("#price").text(price + " TAU PER " + symbol["value"]);
                     from_symbol = symbol["value"];
                     to_symbol = "TAU";
                     price_2 = price;
